@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import java.util.Set;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class DeviceList extends AppCompatActivity {
 
 
 
-        list = (ListView) findViewById(R.id.Listview);
+        //list = (ListView) findViewById(R.id.Listview);
         final Button Connect = (Button) findViewById(R.id.Connect);
 
         Connect.setOnClickListener(new View.OnClickListener()
@@ -63,13 +64,24 @@ public class DeviceList extends AppCompatActivity {
             for(BluetoothDevice bt : pairedDevices)
                 s.add(bt.getName());
 
-
-
-
-
+            for(String ss : s){
+                LinearLayout l = (LinearLayout) findViewById(R.id.list);
+                Button btn = new Button(this);
+                btn.setOnClickListener(getOnClickDoSomething(btn));
+                btn.setText(""+ss);
+                l.addView(btn);
+            }
 
         }
 
+    }
+
+    View.OnClickListener getOnClickDoSomething(final Button button)  {
+        return new View.OnClickListener() {
+            public void onClick(View v) {
+                button.setText("text now set.. ");
+            }
+        };
     }
 
 }
