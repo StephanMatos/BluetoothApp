@@ -61,8 +61,10 @@ public class DeviceList extends AppCompatActivity {
 
             ArrayList<String> s = new ArrayList<>();
 
-            for(BluetoothDevice bt : pairedDevices)
+            for(BluetoothDevice bt : pairedDevices) {
                 s.add(bt.getName());
+                System.out.println(bt.getAddress());
+            }
 
             for(String ss : s){
                 LinearLayout l = (LinearLayout) findViewById(R.id.list);
