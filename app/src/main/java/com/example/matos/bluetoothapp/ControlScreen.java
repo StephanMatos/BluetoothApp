@@ -13,23 +13,7 @@ public class ControlScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_screen);
 
-        for(int i=0; i<2; i++){
-            LinearLayout l = (LinearLayout) findViewById(R.id.ll);
-            Button btn = new Button(this);
-            btn.setOnClickListener(getOnClickDoSomething(btn));
-            btn.setText("btn "+i);
-            l.addView(btn);
-
-        }
-
-
     }
 
-    View.OnClickListener getOnClickDoSomething(final Button button)  {
-        return new View.OnClickListener() {
-            public void onClick(View v) {
-                button.setText("text now set.. ");
-            }
-        };
-    }
+
 }
