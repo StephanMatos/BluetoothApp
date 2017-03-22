@@ -18,7 +18,7 @@ import android.bluetooth.BluetoothDevice;
 
 public class DeviceList extends AppCompatActivity {
 
-
+    public ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,8 @@ public class DeviceList extends AppCompatActivity {
         setContentView(R.layout.activity_device_list);
 
 
+
+        list = (ListView) findViewById(R.id.Listview);
         final Button Connect = (Button) findViewById(R.id.Connect);
 
         Connect.setOnClickListener(new View.OnClickListener()
@@ -35,10 +37,7 @@ public class DeviceList extends AppCompatActivity {
             public void onClick(View v) {
              startBluetooth();
             }
-        }
-
-        );
-
+        });
 
 
     }
@@ -56,6 +55,21 @@ public class DeviceList extends AppCompatActivity {
             int REQUEST_ENABLE_BT = 1;
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
+        if(mBluetoothAdapter.isEnabled()){
+            Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+
+            ArrayList<String> s = new ArrayList<>();
+
+            for(BluetoothDevice bt : pairedDevices)
+                s.add(bt.getName());
+
+
+
+
+
+
+        }
+
     }
 
 }

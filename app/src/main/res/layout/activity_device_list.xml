@@ -11,21 +11,21 @@
 
     tools:context="com.example.matos.bluetoothapp.DeviceList">
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/Listview"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/Connect" />
+
     <Button
         android:text="ListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="42dp"
+        android:id="@+id/Connect"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"
-        android:id="@+id/Connect" />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/Connect"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:id="@+id/Listview" />
+        android:layout_marginStart="87dp" />
 
 </RelativeLayout>
