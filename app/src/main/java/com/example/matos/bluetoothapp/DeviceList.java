@@ -1,5 +1,6 @@
 package com.example.matos.bluetoothapp;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,8 @@ import android.bluetooth.BluetoothDevice;
 public class DeviceList extends AppCompatActivity {
 
     public ListView list;
+    public ArrayList<String> names;
+    public ArrayList<String> adresses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,19 +62,28 @@ public class DeviceList extends AppCompatActivity {
         if(mBluetoothAdapter.isEnabled()){
             Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
 
-            ArrayList<String> s = new ArrayList<>();
+            names = new ArrayList<>();
+            adresses = new ArrayList<>();
+
 
             for(BluetoothDevice bt : pairedDevices) {
-                s.add(bt.getName());
-                System.out.println(bt.getAddress());
+                names.add(bt.getName());
+                adresses.add(bt.getAddress());
             }
 
-            for(String ss : s){
+            int count = 0;
+            for(String name : names){
                 LinearLayout l = (LinearLayout) findViewById(R.id.list);
                 Button btn = new Button(this);
+
                 btn.setOnClickListener(getOnClickDoSomething(btn));
-                btn.setText(""+ss);
+                btn.setText(""+name);
+                btn.setId(count);
+
                 l.addView(btn);
+
+                count++;
+
             }
 
         }
@@ -81,9 +93,39 @@ public class DeviceList extends AppCompatActivity {
     View.OnClickListener getOnClickDoSomething(final Button button)  {
         return new View.OnClickListener() {
             public void onClick(View v) {
-                button.setText("text now set.. ");
+                //button.setText("text now set.. ");
+                int id = button.getId();
+                System.out.println(names.get(id) + " has adress: " + adresses.get(id));
+
+                boolean succes = false;
+
+                if(succes){
+
+                    Intent ControlScreen = new Intent(DeviceList.this, ControlScreen.class);
+                    DeviceList.this.startActivity(ControlScreen);
+
+
+                }else{
+                    Toast.makeText(DeviceList.this, "Connection failed", Toast.LENGTH_LONG).show();
+                }
+
             }
         };
     }
+
+
+
+
+    private class ConnectBT extends AsyncTask<Void, Void, Void>{
+
+        private boolean ConnectSuccess = true;
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            return null;
+        }
+    }
+
+
 
 }
