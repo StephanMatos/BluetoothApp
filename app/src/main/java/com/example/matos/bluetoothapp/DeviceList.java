@@ -17,7 +17,7 @@ import android.bluetooth.BluetoothDevice;
 
 public class DeviceList extends AppCompatActivity {
 
-    //hejhej1
+
 
 
     @Override
