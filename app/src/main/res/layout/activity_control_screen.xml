@@ -68,7 +68,7 @@
                 android:text="Error Correction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView6"
+                android:id="@+id/ErrorCorrectionHeading"
                 android:textSize="18dp"
                 android:textStyle="normal|bold" />
 
@@ -76,14 +76,21 @@
                 android:text="Frame errors corrected: 0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView7"
+                android:id="@+id/errorCorrectionFrameView"
+                android:textSize="14sp" />
+
+            <TextView
+                android:text="Average errors corrected: 0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ErrorCorrectionAverageView"
                 android:textSize="14sp" />
 
             <TextView
                 android:text="Total errors corrected: 0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView8"
+                android:id="@+id/ErrorCorrectionTotalView"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -98,7 +105,7 @@
                 android:text="Compression"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView9"
+                android:id="@+id/compressionHeading"
                 android:textSize="18dp"
                 android:textStyle="normal|bold" />
 
@@ -108,13 +115,13 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignStart="@+id/textViewVolumeHeading"
-                android:id="@+id/switch2" />
+                android:id="@+id/compressionOnOffSwitch" />
 
             <TextView
                 android:text="Compression rate: 0%"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView11" />
+                android:id="@+id/compressionRateView" />
 
         </LinearLayout>
 
