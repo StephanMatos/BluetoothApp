@@ -20,17 +20,17 @@ import android.bluetooth.BluetoothDevice;
 
 public class DeviceList extends AppCompatActivity {
 
-    public ListView list;
-    public ArrayList<String> names;
-    public ArrayList<String> adresses;
+    private ListView list;
+    private ArrayList<String> names;
+    private ArrayList<String> adresses;
+    private Set<BluetoothDevice> pairedDevices;
+    private BluetoothAdapter mBluetoothAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_list);
-
-
 
         //list = (ListView) findViewById(R.id.Listview);
         final Button Connect = (Button) findViewById(R.id.Connect);
@@ -43,13 +43,12 @@ public class DeviceList extends AppCompatActivity {
             }
         });
 
-
     }
 
 
     public void startBluetooth(){
 
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null) {
             System.out.println("Device does not support Bluetooth");
         }
@@ -60,7 +59,7 @@ public class DeviceList extends AppCompatActivity {
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
         if(mBluetoothAdapter.isEnabled()){
-            Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+            pairedDevices = mBluetoothAdapter.getBondedDevices();
 
             names = new ArrayList<>();
             adresses = new ArrayList<>();
@@ -97,17 +96,28 @@ public class DeviceList extends AppCompatActivity {
                 int id = button.getId();
                 System.out.println(names.get(id) + " has adress: " + adresses.get(id));
 
-                boolean succes = false;
+                BluetoothDevice device = null;
 
-                if(succes){
-
-                    Intent ControlScreen = new Intent(DeviceList.this, ControlScreen.class);
-                    DeviceList.this.startActivity(ControlScreen);
-
-
-                }else{
-                    Toast.makeText(DeviceList.this, "Connection failed", Toast.LENGTH_LONG).show();
+                for(BluetoothDevice bt : pairedDevices){
+                    if(bt.getAddress() == adresses.get(id)){
+                        device = bt;
+                    }
                 }
+
+
+              try{
+
+                  System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                  new ConnectThread(device, mBluetoothAdapter).start();
+
+                  Intent ControlScreen = new Intent(DeviceList.this, ControlScreen.class);
+                  DeviceList.this.startActivity(ControlScreen);
+
+              }catch(Exception e){
+
+                  Toast.makeText(DeviceList.this, "Connection failed", Toast.LENGTH_LONG).show();
+
+              }
 
             }
         };
